@@ -1,4 +1,4 @@
-/* ITUSB2 Status Command - Version 1.0 for Debian Linux
+/* ITUSB2 Status Command - Version 1.1 for Debian Linux
    Copyright (c) 2020-2021 Samuel Lourenço
 
    This program is free software: you can redistribute it and/or modify it
@@ -60,7 +60,7 @@ int main(int argc, char **argv)
             err_level = EXIT_FAILURE;
         } else {  // If the device is successfully opened and a handle obtained
             bool kernel_attached = false;
-            if (libusb_kernel_driver_active(devhandle, 0) != 0) {  // If a kernel driver is active on the interface
+            if (libusb_kernel_driver_active(devhandle, 0) == 1) {  // If a kernel driver is active on the interface
                 libusb_detach_kernel_driver(devhandle, 0);  // Detach the kernel driver
                 kernel_attached = true;  // Flag that the kernel driver was attached
             }
@@ -96,13 +96,13 @@ status get_status(libusb_device_handle *devhandle)
     st.cd = get_gpio4(devhandle);  // Get the current value of the GPIO.4 pin, which corresponds to the UDCD signal
     st.hs = get_gpio5(devhandle);  // Get the current value of the GPIO.5 pin, which corresponds to the UDHS signal
     select_cs(devhandle, 0);  // Enable the chip select corresponding to channel 0, and disable any others
-    if (get_current(devhandle) == 0) {  // If first reading (always to be discarded) is zero
+    if (get_raw_current(devhandle) == 0) {  // If first reading (always to be discarded) is zero
         usleep(1100);  // Wait 1.1ms to ensure that the LTC2312 is awake
-        get_current(devhandle);  // Do a second reading and discard it as well
+        get_raw_current(devhandle);  // Do a second reading and discard it as well
     }
     uint16_t curr_code_sum = 0;
     for (int i = 0; i < 5; ++i) {
-        curr_code_sum += get_current(devhandle);  // Read the raw value (from the LTC2312 on channel 0) and add it to the sum
+        curr_code_sum += get_raw_current(devhandle);  // Read the raw value (from the LTC2312 on channel 0) and add it to the sum
     }
     usleep(100);  // Wait 100us, in order to prevent possible errors while disabling the chip select (workaround)
     disable_cs(devhandle, 0);  // Disable the previously enabled chip select

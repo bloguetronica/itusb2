@@ -1,4 +1,4 @@
-/* ITUSB2 core functions - Version 1.0
+/* ITUSB2 core functions - Version 1.1
    Copyright (c) 2020-2021 Samuel Lourenço
 
    This library is free software: you can redistribute it and/or modify it
@@ -40,12 +40,12 @@ extern int err_level;
 void configure_spi_mode(libusb_device_handle *devhandle, uint8_t channel, bool csmode, uint8_t cfrq, bool cpol, bool cpha);
 void disable_cs(libusb_device_handle *devhandle, uint8_t channel);
 void disable_spi_delays(libusb_device_handle *devhandle, uint8_t channel);
-uint16_t get_current(libusb_device_handle *devhandle);
 bool get_gpio1(libusb_device_handle *devhandle);
 bool get_gpio2(libusb_device_handle *devhandle);
 bool get_gpio3(libusb_device_handle *devhandle);
 bool get_gpio4(libusb_device_handle *devhandle);
 bool get_gpio5(libusb_device_handle *devhandle);
+uint16_t get_raw_current(libusb_device_handle *devhandle);
 bool is_otp_locked(libusb_device_handle *devhandle);
 void lock_otp(libusb_device_handle *devhandle);
 void reset(libusb_device_handle *devhandle);

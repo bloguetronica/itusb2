@@ -1,4 +1,4 @@
-/* ITUSB2 List Command - Version 1.0 for Debian Linux
+/* ITUSB2 List Command - Version 1.1 for Debian Linux
    Copyright (c) 2020-2021 Samuel Lourenço
 
    This program is free software: you can redistribute it and/or modify it
@@ -47,7 +47,7 @@ int main(void)
                     printf("%zu\t", counter);  // Print the item number
                     if (libusb_open(devs[i], &devhandle) == 0) {  // Open the listed device. If successfull
                         unsigned char str_desc[256];
-                        libusb_get_string_descriptor_ascii(devhandle, desc.iSerialNumber, str_desc, sizeof(str_desc));  // Get the serial number string in ASCII format
+                        libusb_get_string_descriptor_ascii(devhandle, desc.iSerialNumber, str_desc, (int)sizeof(str_desc));  // Get the serial number string in ASCII format
                         printf("%s", str_desc);  // Print the serial number string
                         libusb_close(devhandle);  // Close the device
                     } else {  // If not, the device is simply listed as unidentified (no error reported)
