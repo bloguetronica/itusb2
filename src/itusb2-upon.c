@@ -1,4 +1,4 @@
-/* ITUSB2 UPOn Command - Version 1.0 for Debian Linux
+/* ITUSB2 UPOn Command - Version 1.1 for Debian Linux
    Copyright (c) 2020-2021 Samuel Lourenço
 
    This program is free software: you can redistribute it and/or modify it
@@ -45,7 +45,7 @@ int main(int argc, char **argv)
             err_level = EXIT_FAILURE;
         } else {  // If the device is successfully opened and a handle obtained
             bool kernel_attached = false;
-            if (libusb_kernel_driver_active(devhandle, 0) != 0) {  // If a kernel driver is active on the interface
+            if (libusb_kernel_driver_active(devhandle, 0) == 1) {  // If a kernel driver is active on the interface
                 libusb_detach_kernel_driver(devhandle, 0);  // Detach the kernel driver
                 kernel_attached = true;  // Flag that the kernel driver was attached
             }
