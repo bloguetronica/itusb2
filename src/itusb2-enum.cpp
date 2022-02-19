@@ -57,11 +57,13 @@ int main(int argc, char **argv)
             }
             errlvl = EXIT_FAILURE;
         } else {  // Operation successful
+            std::cout << "USB device ";
             if (cd) {
-                std::cout << "USB device enumerated in " << (hs ? "high speed" : "full/low speed") << "." << std::endl;
+                std::cout << "enumerated in " << (hs ? "high speed" : "full/low speed") << ".";
             } else {
-                std::cout << "USB device not detected." << std::endl;
+                std::cout << "not detected.";
             }
+            std::cout << std::endl;
         }
         device.close();
     } else {  // Failed to open device
