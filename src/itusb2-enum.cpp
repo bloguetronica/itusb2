@@ -59,11 +59,11 @@ int main(int argc, char **argv)
         } else {  // Operation successful
             std::cout << "USB device ";
             if (cd) {
-                std::cout << "enumerated in " << (hs ? "high speed" : "full/low speed") << ".";
+                std::cout << "enumerated in " << (hs ? "high speed" : "full/low speed");
             } else {
-                std::cout << "not detected.";
+                std::cout << "not detected";
             }
-            std::cout << std::endl;
+            std::cout << "." << std::endl;
         }
         device.close();
     } else {  // Failed to open device
