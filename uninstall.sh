@@ -7,6 +7,7 @@ echo Removing man pages...
 rm -f /usr/local/share/man/man1/itusb2-attach.1.gz
 rm -f /usr/local/share/man/man1/itusb2-detach.1.gz
 rm -f /usr/local/share/man/man1/itusb2-enum.1.gz
+rm -f /usr/local/share/man/man1/itusb2-info.1.gz
 rm -f /usr/local/share/man/man1/itusb2-list.1.gz
 rm -f /usr/local/share/man/man1/itusb2-lockotp.1.gz
 rm -f /usr/local/share/man/man1/itusb2-reset.1.gz
