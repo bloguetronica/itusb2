@@ -1,5 +1,5 @@
 # Makefile for all ITUSB2 commands, Debian Linux (GCC)
-# Copyright (c) 2020-2021 Samuel Lourenço
+# Copyright (c) 2020-2022 Samuel Lourenço
 
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -19,21 +19,26 @@
 
 
 CC = gcc
-CFLAGS = -O2 -std=gnu99 -Wall -pedantic
+CFLAGS = -O2 -std=c11 -Wall -pedantic
+CXX = g++
+CXXFLAGS = -O2 -std=c++11 -Wall -pedantic
 LDFLAGS = -s
 LDLIBS = -lusb-1.0
-OBJECTS = itusb2-core.o libusb-extra.o
-TARGETS = itusb2-attach itusb2-detach itusb2-enum itusb2-list itusb2-lockotp itusb2-reset itusb2-status itusb2-udoff itusb2-udon itusb2-upoff itusb2-upon
+OBJECTS = cp2130.o error.o itusb2device.o libusb-extra.o
+TARGETS = itusb2-attach itusb2-detach itusb2-enum itusb2-info itusb2-list itusb2-lockotp itusb2-reset itusb2-status itusb2-udoff itusb2-udon itusb2-upoff itusb2-upon
 
 .PHONY: all clean install uninstall
 
 all: $(TARGETS)
 
 $(TARGETS): % : %.o $(OBJECTS)
-	$(CC) $(LDFLAGS) $^ $(LDLIBS) -o $@
+	$(CXX) $(LDFLAGS) $^ $(LDLIBS) -o $@
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $<
+	
+%.o: %.cpp
+	$(CXX) $(CXXFLAGS) -c $<
 
 clean:
 	$(RM) *.o $(TARGETS)
