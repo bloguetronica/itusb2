@@ -1,5 +1,5 @@
 This directory contains all source code files required for compiling the
-commands for ITUSB1 USB Test Switch. A list of relevant files follows:
+commands for ITUSB2 USB Test Switch. A list of relevant files follows:
 – cp2130.cpp;
 – cp2130.h;
 – error.cpp;
