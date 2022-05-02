@@ -18,13 +18,20 @@
 # Please feel free to contact me via e-mail: samuel.fmlourenco@gmail.com
 
 
+prefix = /usr/local
+
 CC = gcc
 CFLAGS = -O2 -std=c11 -Wall -pedantic
 CXX = g++
 CXXFLAGS = -O2 -std=c++11 -Wall -pedantic
 LDFLAGS = -s
 LDLIBS = -lusb-1.0
+MANPAGES = itusb2-attach.1 itusb2-detach.1 itusb2-enum.1 itusb2-info.1 itusb2-list.1 itusb2-lockotp.1 itusb2-reset.1 itusb2-status.1 itusb2-udoff.1 itusb2-udon.1 itusb2-upoff.1 itusb2-upon.1
+MANPAGESGZ = $(MANPAGES:=.gz)
+MKDIR = mkdir -p
+MV = mv -f
 OBJECTS = cp2130.o error.o itusb2device.o libusb-extra.o
+RMDIR = rmdir --ignore-fail-on-non-empty
 TARGETS = itusb2-attach itusb2-detach itusb2-enum itusb2-info itusb2-list itusb2-lockotp itusb2-reset itusb2-status itusb2-udoff itusb2-udon itusb2-upoff itusb2-upon
 
 .PHONY: all clean install uninstall
@@ -36,15 +43,25 @@ $(TARGETS): % : %.o $(OBJECTS)
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $<
-	
+
 %.o: %.cpp
 	$(CXX) $(CXXFLAGS) -c $<
 
 clean:
 	$(RM) *.o $(TARGETS)
 
-install:
-	mv -f $(TARGETS) /usr/local/bin/.
+install: all install-bin install-man
 
-uninstall:
-	cd /usr/local/bin && $(RM) $(TARGETS)
+install-bin:
+	$(MKDIR) $(DESTDIR)$(prefix)/bin && $(MV) $(TARGETS) $(DESTDIR)$(prefix)/bin/.
+
+install-man:
+	cd man && gzip -fknv9 $(MANPAGES) && $(MKDIR) $(DESTDIR)$(prefix)/man/man1 && $(MV) $(MANPAGESGZ) $(DESTDIR)$(prefix)/man/man1/.
+
+uninstall: uninstall-man uninstall-bin clean
+
+uninstall-bin:
+	cd $(DESTDIR)$(prefix)/bin && $(RM) $(TARGETS)
+
+uninstall-man:
+	if [ -d $(DESTDIR)$(prefix)/man/man1 ]; then cd $(DESTDIR)$(prefix)/man/man1 && $(RM) $(MANPAGESGZ) && $(RMDIR) $(DESTDIR)$(prefix)/man/man1; fi
