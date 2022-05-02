@@ -56,7 +56,7 @@ install-bin:
 	$(MKDIR) $(DESTDIR)$(prefix)/bin && $(MV) $(TARGETS) $(DESTDIR)$(prefix)/bin/.
 
 install-man:
-	cd man && gzip -fknv9 $(MANPAGES) && $(MKDIR) $(DESTDIR)$(prefix)/man/man1 && $(MV) $(MANPAGESGZ) $(DESTDIR)$(prefix)/man/man1/.
+	cd man && gzip -fknv9 $(MANPAGES) && $(MKDIR) $(DESTDIR)$(prefix)/share/man/man1 && $(MV) $(MANPAGESGZ) $(DESTDIR)$(prefix)/share/man/man1/.
 
 uninstall: uninstall-man uninstall-bin clean
 
@@ -64,4 +64,4 @@ uninstall-bin:
 	cd $(DESTDIR)$(prefix)/bin && $(RM) $(TARGETS)
 
 uninstall-man:
-	if [ -d $(DESTDIR)$(prefix)/man/man1 ]; then cd $(DESTDIR)$(prefix)/man/man1 && $(RM) $(MANPAGESGZ) && $(RMDIR) $(DESTDIR)$(prefix)/man/man1; fi
+	if [ -d $(DESTDIR)$(prefix)/share/man/man1 ]; then cd $(DESTDIR)$(prefix)/share/man/man1 && $(RM) $(MANPAGESGZ) && $(RMDIR) $(DESTDIR)$(prefix)/share/man/man1; fi
