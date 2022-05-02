@@ -1,0 +1,46 @@
+.TH ITUSB2-STATUS 1
+.SH NAME
+itusb2-status \- show ITUSB2 USB Test Switch status
+.SH SYNOPSIS
+.B itusb2-status
+.RI [ SERIALNUMBER ]
+.SH DESCRIPTION
+.B itusb2-status
+shows the status of the USB test switch, giving detailed information. You can
+use
+.B itusb2-status
+to see which lines are connected, if a device under test (DUT) is detected
+and, when applicable, the link mode as well. You can also use it to measure
+the current being consumed by the device. This command will also indicate if
+the consumption current exceeds the 500mA limit as per the USB 2.0
+specification, by displaying "(OC)" next to the value.
+
+You should note that, if the current meets or exceeds 1000mA, the value will
+be displayed as "out of limits" by the use of the acronym "OL". In that case,
+the possible over-current condition might trip the inbuilt current limit
+protection, triggering a generic fault warning as well.
+
+Mind that you shouldn't invoke
+.B itusb2-status
+right after invoking commands that switch lines on or off, such as
+.BR itusb2-attach ,
+.BR itusb2-detach ,
+.BR itusb2-udoff ,
+.BR itusb2-udon ,
+.B itusb2-upoff
+and
+.BR itusb2-upon ,
+as it may give you erroneous information about DUT detection and link mode. In
+other words, you should allow the DUT to fully enumerate before invoking this
+command. Normally, waiting a couple of seconds is sufficient.
+
+Specifying a serial number is optional.
+.SH "EXIT STATUS"
+Exits with a status of zero in case of success. Returns one should an error
+occur.
+.SH AUTHOR
+Samuel Lourenço (samuel.fmlourenco@gmail.com).
+.SH "SEE ALSO"
+itusb2-attach(1), itusb2-detach(1), itusb2-enum(1), itusb2-info(1),
+itusb2-list(1), itusb2-lockotp(1), itusb2-reset(1), itusb2-udoff(1),
+itusb2-udon(1), itusb2-upoff(1), itusb2-upon(1)

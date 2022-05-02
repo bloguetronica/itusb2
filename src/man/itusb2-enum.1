@@ -1,0 +1,44 @@
+.TH ITUSB2-ENUM 1
+.SH NAME
+itusb2-enum \- performs enumeration test via ITUSB2 USB Test Switch
+.SH SYNOPSIS
+.B itusb2-enum
+.RI [ SERIALNUMBER ]
+.SH DESCRIPTION
+.B itusb2-enum
+performs a single enumeration test between the device under test (DUT) and the
+corresponding host (HUT), when both are connected respectively to the
+downstream and upstream ports of the USB test switch. This test will first
+disconnect the VBUS and/or data lines, if applicable. It will then reconnect
+the same lines, reattaching the device. After this operation, and after
+detecting that the DUT is enumerated,
+.B itusb2-enum
+will retrieve the results of the enumeration test.
+
+Effectively,
+.B itusb2-enum
+acts like
+.B itusb2-detach
+followed by
+.BR itusb2-attach ,
+with the distinction that it allows the DUT to enumerate, subsequently
+retrieving the link status. This command can be invoked repeatedly, or can be
+called inside a for or a while loop. You can see some examples below.
+
+Specifying a serial number is optional.
+.SH EXAMPLES
+.TP
+.B for ((i = 0; i < 100; ++i)); do itusb2-enum; done
+Performs a sequence of 100 enumerations tests.
+.TP
+.B while true; do itusb2-enum; done
+Performs an infinite number of enumeration tests.
+.SH "EXIT STATUS"
+Exits with a status of zero in case of success. Returns one should an error
+occur.
+.SH AUTHOR
+Samuel Lourenço (samuel.fmlourenco@gmail.com).
+.SH "SEE ALSO"
+itusb2-attach(1), itusb2-detach(1), itusb2-info(1), itusb2-list(1),
+itusb2-lockotp(1), itusb2-reset(1), itusb2-status(1), itusb2-udoff(1),
+itusb2-udon(1), itusb2-upoff(1), itusb2-upon(1)

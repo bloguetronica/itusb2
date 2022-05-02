@@ -1,0 +1,30 @@
+.TH ITUSB2-DETACH 1
+.SH NAME
+itusb2-detach \- disconnect device from host via ITUSB2 USB Test Switch
+.SH SYNOPSIS
+.B itusb2-detach
+.RI [ SERIALNUMBER ]
+.SH DESCRIPTION
+.B itusb2-detach
+disconnects the device under test (DUT) from the host that is currently
+plugged into the the USB test switch upstream port. In essence, when in a
+connected state, the USB test switch will emulate a manual detachment. It does
+that by first disconnecting the data lines between host and device, and then
+by disconnecting the VBUS line, after 100ms. However, note that this command
+will have no effect if the switch is already in a fully disconnected state.
+Conversely, you can invoke
+.B itusb2-attach
+to connect or reconnect the DUT. You can also verify the connection status by
+calling
+.BR itusb2-status .
+
+Specifying a serial number is optional.
+.SH "EXIT STATUS"
+Exits with a status of zero in case of success. Returns one should an error
+occur.
+.SH AUTHOR
+Samuel Lourenço (samuel.fmlourenco@gmail.com).
+.SH "SEE ALSO"
+itusb2-attach(1), itusb2-enum(1), itusb2-info(1), itusb2-list(1),
+itusb2-lockotp(1), itusb2-reset(1), itusb2-status(1), itusb2-udoff(1),
+itusb2-udon(1), itusb2-upoff(1), itusb2-upon(1)

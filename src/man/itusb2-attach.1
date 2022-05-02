@@ -1,0 +1,29 @@
+.TH ITUSB2-ATTACH 1
+.SH NAME
+itusb2-attach \- connect device to host via ITUSB2 USB Test Switch
+.SH SYNOPSIS
+.B itusb2-attach
+.RI [ SERIALNUMBER ]
+.SH DESCRIPTION
+.B itusb2-attach
+connects the device under test (DUT) to the host that is currently plugged
+into the the USB test switch upstream port. In essence, when in a disconnected
+state, the USB test switch will emulate a manual attachment. It does that by
+first connecting the VBUS line between host and device, and then by connecting
+the data lines, after 100ms. However, note that this command will have no
+effect if the switch is already in a fully connected state. Conversely, you
+can invoke
+.B itusb2-detach
+to disconnect the DUT. You can also verify the connection status by calling
+.BR itusb2-status .
+
+Specifying a serial number is optional.
+.SH "EXIT STATUS"
+Exits with a status of zero in case of success. Returns one should an error
+occur.
+.SH AUTHOR
+Samuel Lourenço (samuel.fmlourenco@gmail.com).
+.SH "SEE ALSO"
+itusb2-detach(1), itusb2-enum(1), itusb2-info(1), itusb2-list(1),
+itusb2-lockotp(1), itusb2-reset(1), itusb2-status(1), itusb2-udoff(1),
+itusb2-udon(1), itusb2-upoff(1), itusb2-upon(1)
