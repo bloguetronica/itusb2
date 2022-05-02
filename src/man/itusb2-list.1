@@ -1,0 +1,20 @@
+.TH ITUSB2-LIST 1
+.SH NAME
+itusb2-list \- list connected ITUSB2 USB Test Switch devices
+.SH SYNOPSIS
+.B itusb2-list
+.SH DESCRIPTION
+.B itusb2-list
+lists all USB test switch devices that are currently connected. Note that the
+first device on the list is always the one addressed by default. Hence, when
+applicable, a command invoked without any serial number specified will always
+take effect on that device.
+.SH "EXIT STATUS"
+Exits with a status of zero in case of success. Returns one should an error
+occur.
+.SH AUTHOR
+Samuel Lourenço (samuel.fmlourenco@gmail.com).
+.SH "SEE ALSO"
+itusb2-attach(1), itusb2-detach(1), itusb2-enum(1), itusb2-info(1),
+itusb2-lockotp(1), itusb2-reset(1), itusb2-status(1), itusb2-udoff(1),
+itusb2-udon(1), itusb2-upoff(1), itusb2-upon(1)

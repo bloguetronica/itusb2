@@ -1,0 +1,22 @@
+.TH ITUSB2-INFO 1
+.SH NAME
+itusb2-info \- show information about ITUSB2 USB Test Switch
+.SH SYNOPSIS
+.B itusb2-info
+.RI [ SERIALNUMBER ]
+.SH DESCRIPTION
+.B itusb2-info
+shows information about the USB test switch device, namely the manufacturer
+and product names, the serial number, the hardware revision and the maximum
+current consumption.
+
+Specifying a serial number is optional.
+.SH "EXIT STATUS"
+Exits with a status of zero in case of success. Returns one should an error
+occur.
+.SH AUTHOR
+Samuel Lourenço (samuel.fmlourenco@gmail.com).
+.SH "SEE ALSO"
+itusb2-attach(1), itusb2-detach(1), itusb2-enum(1), itusb2-list(1),
+itusb2-lockotp(1), itusb2-reset(1), itusb2-status(1), itusb2-udoff(1),
+itusb2-udon(1), itusb2-upoff(1), itusb2-upon(1)

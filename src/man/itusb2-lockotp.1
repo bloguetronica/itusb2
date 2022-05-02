@@ -1,0 +1,25 @@
+.TH ITUSB2-LOCKOTP 1
+.SH NAME
+itusb2-lockotp \- lock ITUSB2 USB Test Switch OTP ROM
+.SH SYNOPSIS
+.B itusb2-lockotp
+.I SERIALNUMBER
+.SH DESCRIPTION
+.B itusb2-lockotp
+locks the USB test switch OTP ROM, preventing further (and possibly unwanted)
+changes. It is important to lock all fields on the OTP ROM, since any changes
+to untouched fields will be irreversible and can impair the device. Note that
+you must specify the serial number of the target device.
+.SH EXAMPLE
+.TP
+.B itusb2-lockotp IU2-0027F8T2
+Lock the OTP ROM of device with serial number IU2-0027F8T2.
+.SH "EXIT STATUS"
+Exits with a status of zero in case of success. Returns one should an error
+occur, or two in case of bad input.
+.SH AUTHOR
+Samuel Lourenço (samuel.fmlourenco@gmail.com).
+.SH "SEE ALSO"
+itusb2-attach(1), itusb2-detach(1), itusb2-enum(1), itusb2-info(1),
+itusb2-list(1), itusb2-reset(1), itusb2-status(1), itusb2-udoff(1),
+itusb2-udon(1), itusb2-upoff(1), itusb2-upon(1)
