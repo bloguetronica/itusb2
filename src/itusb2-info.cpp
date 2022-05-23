@@ -1,4 +1,4 @@
-/* ITUSB2 Info Command - Version 1.0 for Debian Linux
+/* ITUSB2 Info Command - Version 1.1 for Debian Linux
    Copyright (c) 2022 Samuel Lourenço
 
    This program is free software: you can redistribute it and/or modify it
@@ -47,7 +47,7 @@ int main(int argc, char **argv)
         CP2130::USBConfig config = device.getUSBConfig(errcnt, errstr);  // USB configuration
         if (errcnt > 0) {  // In case of error
             if (device.disconnected()) {  // If the device disconnected
-                std::cerr << "Device disconnected.\n";
+                std::cerr << "Error: Device disconnected.\n";
             } else {
                 printErrors(errstr);
             }
@@ -63,11 +63,11 @@ int main(int argc, char **argv)
         device.close();
     } else {  // Failed to open device
         if (err == ITUSB2Device::ERROR_INIT) {  // Failed to initialize libusb
-            std::cerr << "Could not initialize libusb\n";
+            std::cerr << "Error: Could not initialize libusb\n";
         } else if (err == ITUSB2Device::ERROR_NOT_FOUND) {  // Failed to find device
-            std::cerr << "Could not find device.\n";
+            std::cerr << "Error: Could not find device.\n";
         } else if (err == ITUSB2Device::ERROR_BUSY) {  // Failed to claim interface
-            std::cerr << "Device is currently unavailable.\n";
+            std::cerr << "Error: Device is currently unavailable.\n";
         }
         errlvl = EXIT_FAILURE;
     }
